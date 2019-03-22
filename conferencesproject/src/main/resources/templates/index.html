@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <!-- SITE TITTLE -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eventre</title>
+  
+  <!-- PLUGINS CSS STYLE -->
+  <!-- Bootstrap -->
+  <link href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Themefisher Font -->  
+  <link href="../static/plugins/themefisher-font/style.css" th:href="@{/plugins/themefisher-font/style.css}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="../static/plugins/font-awsome/css/font-awesome.min.css" th:href="@{/plugins/font-awsome/css/font-awesome.min.css}" rel="stylesheet">
+  <!-- Magnific Popup -->
+  <link href="../static/plugins/magnific-popup/magnific-popup.css" th:href="@{/plugins/magnific-popup/magnific-popup.css}" rel="stylesheet">
+  <!-- Slick Carousel -->
+  <link href="../static/plugins/slick/slick.css"  th:href="@{/plugins/slick/slick.css}" rel="stylesheet">
+  <link href="../static/plugins/slick/slick-theme.css" th:href="@{/plugins/slick/slick-theme.css}" rel="stylesheet">
+  <!-- CUSTOM CSS -->
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+
+  <!-- FAVICON -->
+  <link href="../static/images/favicon.png" th:href="@{/images/favicon.png}" rel="shortcut icon">
+
+</head>
+
+<body class="body-wrapper">
+
+
+<!--========================================
+=            Navigation Section            =
+=========================================-->
+
+<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+  <div class="container-fluid p-0">
+      <!-- logo -->
+      <a class="navbar-brand" href="index.html">
+        <img src="../images/logo.png" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+          <a class="nav-link" th:href="@{index}"  >Home
+            <span>/</span>
+          </a>
+          
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="speakers.html">Speakers
+            <span>/</span>
+          </a>
+        </li>
+        
+       
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{Sponsors}">Sponsors<span>/</span></a>
+        </li>
+        <li class="nav-item dropdown dropdown-slide" th:if="${currentUser.class.simpleName=='author' &&  isConnected  eq true}">
+          <a class="nav-link" href="#" data-toggle="dropdown">Article<span>/</span></a>
+           
+            <div class="dropdown-menu">
+              <a class="dropdown-item" th:href="@{addArticle}">add articles</a>
+              <a class="dropdown-item" th:href="@{allArticle}">my article</a>
+      
+            </div>
+        </li>
+        <li class="nav-item" th:if="${currentUser.class.simpleName=='reviewer' &&  isConnected  eq true}">
+          <a class="nav-link" th:href="@{allArticle}" >Article<span>/</span></a>
+           
+        </li>
+         <li class="nav-item" th:if="${isConnected  eq true}">
+          <a class="nav-link" th:href="@{logout}">deconnexion</a>
+        </li>
+      
+      </ul>
+      <a href="#" class="ticket">
+        <img src="../images/icon/ticket.png" alt="ticket">
+        <span>Buy Ticket</span>
+      </a>
+      </div>
+  </div>
+</nav>
+
+<!--====  End of Navigation Section  ====-->
+
+
+
+<!--============================
+=            Banner            =
+=============================-->
+
+<section class="banner-two bg-banner-two overlay-white-slant text-overlay">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<!-- Content Block -->
+				<div class="block">
+					<h1 th:text="${lastEvent.SUBJECT}"></h1>
+					<h2 >Conference</h2>
+					
+					<h6 th:text="${lastEvent.eventDate}" ></h6>
+					<!-- Action Button -->
+					<a href="#" class="btn btn-main-md">get ticket now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Banner  ====-->
+
+<!--===========================
+=            About            =
+============================-->
+
+<section class="section about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 col-md-6 align-self-center">
+				<div class="image-block two bg-about">
+					<img class="img-fluid" src="../images/speakers/featured-speaker-two.jpg" alt="">
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 align-self-center ml-lg-auto">
+				<div class="content-block">
+					<h2>About The <span class="alternate">Eventre</span></h2>
+					<div class="description-one">
+						<p>
+							in this part u should add something as description to eventre
+						</p>
+					</div>
+					
+					<ul class="list-inline">
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-main-md">Buy ticket</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section about" th:if="${isConnected  eq true}">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-lg-12 col-md-12 align-self-center ml-lg-auto">
+				<div class="content-block">
+					<h2>editorial guidelines </h2>
+					<div class="description-one">
+					<p>This short note provides step-by-step guidelines to write a review article or a book chapter. I explain in particular a
+						convenient method to build the abstract by writing short conclusions at the end of article sections. I also give
+						general writing advices.</p>
+			    	<p>
+							STEP 1 :Read at least five high-quality chapters on a similar topic to make yours better.</p>
+					<p> 	STEP 2 :Gather and read about 50-100 original articles on a topic within your scientific field</p>
+				    <p>		STEP 3 :Write down a list of about 5-8 subtopics that will constitute a draft of your article sections. The structure below
+                                    shows in particular that the Introduction section is abstracted in the first part of the abstract, and that sections are
+                                    abstracted in the second part of the abstract	</p>
+                    <p>     STEP 4 :Write in each section 1-3 paragraphs including one illustration showing the section point: a figure, a table, a
+									scheme or a photo… Use colours. Sections should analyse, discuss and compare the results from about 5-8
+									original articles. End the sections with 1-2 sentences concluding on the major point, trend or result that you have
+									deduced from your literature analysis. See also abstract comments below</p>
+					<p>		STEP 5 :Write the introduction section starting by 1-2 paragraphs of societal and general issues, almost readable by the
+									public, and then write 1-2 paragraphs of scientific issues related to your topic. Insert in the introduction a figure
+									containing 1-2 nice colour photos related to the topic and readable by the public, this will highly increase the
+									visibility of your review article</p>
+					<p>	    STEP 6 :Write the abstract, the abstract should have two parts:</p>
+					<p>				1) ISSUES/PROBLEMS: abstract of the Introduction section
+									This part, about 5-7 sentences, should give first all general, societal, environmental issues related to your topic,
+									understandable by a very wide readership: this is the big picture. Then the text should explain all specific, local,
+									scientific, conceptual issues related to your topic.
+					<p>				2) MAJOR ADVANCES: abstract of article sections
+									This part should start by e.g. "We reviewed… The major points are 1)…, 2)…". Indeed you should give here the
+									major points and advances that you demonstrate in the sections by literature analysis. Those points should be
+									precise trends (increase, decrease…) supported by data (%, numbers), whenever possible. A convenient way to
+									build this second part of the abstract is to write at the end of each article section a conclusion of about 1-2
+									sentences to summarize the major point of the section and its significance. Then all those 1-2 sentence
+									conclusions can be gathered in the second part of the abstract. In other words this second part of the abstract
+									should clearly show the added value of your analysis. This second part of the abstract is indeed the solution to the
+									problems explained in the first part. Overall it is the contrast between the first and second part that makes the value
+									of the article for the reader, and in turn the impact in terms of citations.</p>
+					<p>  	STEP 7 :Write the title using both specific and general keywords. Please note that your title must be readable by scientists
+									out of your field, because science is interdisciplinary.</p>
+								
+					</div>
+					
+					<ul class="list-inline">
+						
+						<li class="list-inline-item">
+							<a href="https://www.ac-strasbourg.fr/fileadmin/pedagogie/documentation/Pedagogie/Medias/Presse_espagnol_Wimmer-Nejman/dossier_eleves.pdf" class="btn btn-transparent-md">download template</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ticket-feature">
+	<div class="container-fluid m-0 p-0">
+		<div class="row p-0 m-0">
+			<div class="col-lg-7 p-0 m-0">
+				<div class="block bg-timer overlay-dark text-center">
+					<div class="section-title white m-0">
+						<h3>Limited Audience <span class="alternate">Seats</span></h3>
+						
+					</div>
+					<!-- Coundown Timer -->
+					<div class="timer"></div>
+					<a href="#" class="btn btn-main-md">Buy Ticket</a>
+				</div>
+			</div>
+			<div class="col-lg-5 p-0">
+				<div class="block-2">
+					<div class="row no-gutters">
+						<div class="col-6">
+							<!-- Service item -->
+							<div class="service-item">
+								<i class="fa fa-microphone"></i>
+								<h5><span th:text="${speakers}"></span>  Speakers</h5>
+							</div>
+						</div>
+						<div class="col-6">
+							<!-- Service item -->
+							<div class="service-item">
+								<i class="fa fa-flag"></i>
+								<h5><span th:text="${lastEvent.SEATS}"></span> + Seats</h5>
+							</div>
+						</div>
+						<div class="col-6">
+							<!-- Service item -->
+							<div class="service-item">
+								<i class="fa fa-ticket"></i>
+								<h5><span th:text="${lastEvent.nbTickets}"></span> tickets</h5>
+							</div>
+						</div>
+						<div class="col-6">
+							<!-- Service item -->
+							<div class="service-item">
+								<i class="fa fa-calendar"></i>
+								<h5><span th:text="${lastEvent.eventDay}"></span> days event</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--===================================
+=            Pricing Table            =
+====================================-->
+
+<section class="section pricing two">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h3>Get <span class="alternate">ticket</span></h3>
+				
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-md-6">
+				<!-- Pricing Item -->
+				<div class="pricing-item">
+					<div class="pricing-heading text-center">
+						<!-- Title -->
+						<div class="title">
+							<h6>Starter</h6>
+						</div>
+						<!-- Price -->
+						<div class="price">
+							<h2>$39.00</h2>
+						</div>
+					</div>
+					<div class="pricing-body">
+						<!-- Feature List -->
+						<ul class="feature-list m-0 p-0">
+							<li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seats</p></li>
+							<li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
+							<li><p><span class="fa fa-times-circle unavailable"></span>Certificate</p></li>
+							<li><p><span class="fa fa-times-circle unavailable"></span>Easy Access</p></li>
+						</ul>
+					</div>
+					<div class="pricing-footer text-center">
+						<a href="#" class="btn btn-transparent-md">Buy a ticket</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<!-- Pricing Item -->
+				<div class="pricing-item featured">
+					<div class="pricing-heading text-center">
+						<!-- Title -->
+						<div class="title">
+							<h6>Standard</h6>
+						</div>
+						<!-- Price -->
+						<div class="price">
+							<h2>$49.00</h2>
+						</div>
+					</div>
+					<div class="pricing-body">
+						<!-- Feature List -->
+						<ul class="feature-list m-0 p-0">
+							<li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seats</p></li>
+							<li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
+							<li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
+							<li><p><span class="fa fa-times-circle unavailable"></span>Easy Access</p></li>
+						</ul>
+					</div>
+					<div class="pricing-footer text-center">
+						<a href="#" class="btn btn-main-md">Buy a ticket</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 m-auto">
+				<!-- Pricing Item -->
+				<div class="pricing-item">
+					<div class="pricing-heading text-center">
+						<!-- Title -->
+						<div class="title">
+							<h6>Platinum</h6>
+						</div>
+						<!-- Price -->
+						<div class="price">
+							<h2>$99.00</h2>
+						</div>
+					</div>
+					<div class="pricing-body">
+						<!-- Feature List -->
+						<ul class="feature-list m-0 p-0">
+							<li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seats</p></li>
+							<li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
+							<li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
+							<li><p><span class="fa fa-check-circle available"></span>Easy Access</p></li>
+						</ul>
+					</div>
+					<div class="pricing-footer text-center">
+						<a href="#" class="btn btn-transparent-md">Buy a ticket</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Pricing Table  ====-->
+
+<!--================================
+=            Google Map            =
+=================================-->
+
+<section class="map new" th:if="${isConnected  eq false}">
+<div id="map"></div>
+	
+	<div class="register overlay-dark bg-registration-two">
+		<div class="block">
+			<div class="title text-center">
+				<h3>Register to <span class="alternate">Eventre</span></h3>
+				
+			</div>
+			<form th:action="@{inscription}" method="post" class="row">
+				<div class="col-md-6">
+					<input type="text" class="form-control main" placeholder="Your full Name" name="userFullName" th:value="${User.userFullName}">
+				</div>
+				<div class="col-md-6">
+					<input type="email" class="form-control main" placeholder="Email" name="email" th:value="${User.email}">
+				</div>
+				<div class="col-md-6">
+					<input type="text" class="form-control main" placeholder="profession" name="profession" th:value="${User.profession}">
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<input type="password" class="form-control main" placeholder="password" name="password" th:value="${User.password}">
+				
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<a th:href=@{login} >Already a member ? Login</a>
+					</div>
+				</div>
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-white-md">Register Now</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Google Map  ====-->
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block text-center">
+            <div class="footer-logo">
+              <img src="../images/footer-logo.png" alt="logo" class="img-fluid">
+            </div>
+            <ul class="social-links-footer list-inline">
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-instagram"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-rss"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-vimeo"></i></a>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</footer>
+<!-- Subfooter -->
+<footer class="subfooter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 align-self-center">
+        <div class="copyright-text">
+          <p><a href="#">Eventre</a> &#169; 2019 All Right Reserved</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+          <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+  <!-- JAVASCRIPTS -->
+  <!-- jQuey -->
+  <script src="../plugins/jquery/jquery.js" th:href="@{/plugins/jquery/jquery.js}"></script>
+  <!-- Popper js -->
+  <script src="../plugins/popper/popper.min.js" th:href="@{/plugins/popper/popper.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../plugins/bootstrap/js/bootstrap.min.js" th:href="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+  <!-- Smooth Scroll -->
+  <script src="../plugins/smoothscroll/SmoothScroll.min.js" th:href="@{/plugins/smoothscroll/SmoothScroll.min.js}"></script>  
+  <!-- Isotope -->
+  <script src="../plugins/isotope/mixitup.min.js" th:href="@{/plugins/isotope/mixitup.min.js}"></script>  
+  <!-- Magnific Popup -->
+  <script src="../plugins/magnific-popup/jquery.magnific-popup.min.js" th:href="@{/plugins/magnific-popup/jquery.magnific-popup.min.js}"></script>
+  <!-- Slick Carousel -->
+  <script src="../plugins/slick/slick.min.js" th:href="@{/plugins/slick/slick.min.js}"></script>  
+  <!-- SyoTimer -->
+  <script src="../plugins/syotimer/jquery.syotimer.min.js" th:href="@{/plugins/syotimer/jquery.syotimer.min.js}"></script>
+  <!-- Google Mapl -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+  <!-- Custom Script -->
+  <script src="../js/custom.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+  <script type="text/javascript" src="../plugins/google-map/gmap.js" th:href="@{/plugins/google-map/gmap.js}"></script>
+</body>
+
+</html>

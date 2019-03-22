@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <!-- SITE TITTLE -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eventre</title>
+  
+  <!-- PLUGINS CSS STYLE -->
+  <!-- Bootstrap -->
+  <link href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Themefisher Font -->  
+  <link href="../static/plugins/themefisher-font/style.css" th:href="@{/plugins/themefisher-font/style.css}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="../static/plugins/font-awsome/css/font-awesome.min.css" th:href="@{/plugins/font-awsome/css/font-awesome.min.css}" rel="stylesheet">
+  <!-- Magnific Popup -->
+  <link href="../static/plugins/magnific-popup/magnific-popup.css" th:href="@{/plugins/magnific-popup/magnific-popup.css}" rel="stylesheet">
+  <!-- Slick Carousel -->
+  <link href="../static/plugins/slick/slick.css"  th:href="@{/plugins/slick/slick.css}" rel="stylesheet">
+  <link href="../static/plugins/slick/slick-theme.css" th:href="@{/plugins/slick/slick-theme.css}" rel="stylesheet">
+  <!-- CUSTOM CSS -->
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+
+  <!-- FAVICON -->
+  <link href="../static/images/favicon.png" th:href="@{/images/favicon.png}" rel="shortcut icon">
+
+
+</head>
+
+<body class="body-wrapper">
+
+
+<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+  <div class="container-fluid p-0">
+      <!-- logo -->
+      <a class="navbar-brand" href="index.html">
+        <img src="../images/logo.png" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+          <a class="nav-link" th:href="@{index}"  >Home
+            <span>/</span>
+          </a>
+          
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="speakers.html">Speakers
+            <span>/</span>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="schedule.html">Schedule<span>/</span></a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" th:href="@{Sponsors}">Sponsors<span>/</span></a>
+        </li>
+        <li class="nav-item dropdown dropdown-slide" th:if="${isConnected  eq true}">
+          <a class="nav-link" href="#" data-toggle="dropdown">Article<span>/</span></a>
+           
+            <div class="dropdown-menu">
+              <a class="dropdown-item" th:href="@{addArticle}">add articles</a>
+              <a class="dropdown-item" th:href="@{allArticle}">my article</a>
+      
+            </div>
+        </li>
+         <li class="nav-item" th:if="${isConnected  eq true}">
+          <a class="nav-link" th:href="@{logout}">deconnexion</a>
+        </li>
+      
+      </ul>
+      <a href="#" class="ticket">
+        <img src="../images/icon/ticket.png" alt="ticket">
+        <span>Buy Ticket</span>
+      </a>
+      </div>
+  </div>
+</nav>
+<!--====  End of Navigation Section  ====-->
+
+
+
+<!--================================
+=            Page Title            =
+=================================-->
+
+<section class="page-title bg-title overlay-dark">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<div class="title">
+					<h3>My article</h3>
+				</div>
+				<ol class="breadcrumb p-0 m-0">
+				  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+				  <li class="breadcrumb-item active">My article</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Page Title  ====-->
+
+
+<!--==============================
+=            Schedule            =
+===============================-->
+
+<section class="section schedule">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+					<div class="schedule-contents bg-schedule">
+					<div class="tab-content" id="pills-tabContent">
+					  <div class="tab-pane fade show active schedule-item" id="nov20">
+					  	<!-- Headings -->
+					  	<table class="headings">
+						  <tr>
+						    <th class="headings"> Article Title</th>
+						    <th class="speaker">Article resume</th>
+						    <th class="subject">category</th>
+						    <th class="venue">status</th>
+						  </tr>
+						  <tr  th:each="e:${articles}">
+						    <td class="time"><a th:href="@{viewContentarticle(id=${e.idArticle})}"><span class="time"  th:text="${e.titreArticle}"></span></a></td>
+						    <td class="speaker"><span class="name" th:text="${e.resumeArticle}"></span></td>
+						    <td class="subject" th:text="${e.category}"></td>
+						    <td th:class="${e.status} ? 'label label-success' : 'label label-danger'" th:text="${e.status}?  valider : NonValider"></td>
+						<td>
+					       <a th:href="@{editArticle(id=${e.idArticle})}">  
+					         <i class="fa fa-pencil-square-o"></i> </a>
+					       <a th:href="@{supprimerArticle(id=${e.idArticle})}">  
+					       <i class="fa fa-trash"></i></a>
+					     </td>
+						  </tr>
+ 
+						</table>
+					  </div>
+					</div>
+				</div>
+				
+					
+				
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Schedule  ====-->
+
+<!--==============================================
+=            Call to Action Subscribe            =
+===============================================-->
+
+<!--====  End of Call to Action Subscribe  ====-->
+
+
+<!--====  End of Google Map  ====-->
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block text-center">
+            <div class="footer-logo">
+              <img src="../images/footer-logo.png" alt="logo" class="img-fluid">
+            </div>
+            <ul class="social-links-footer list-inline">
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-instagram"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-rss"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="fa fa-vimeo"></i></a>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</footer>
+<!-- Subfooter -->
+<footer class="subfooter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 align-self-center">
+        <div class="copyright-text">
+          <p><a href="#">Eventre</a> &#169; 2019 All Right Reserved</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+          <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+ <!-- JAVASCRIPTS -->
+  <!-- jQuey -->
+  <script src="../plugins/jquery/jquery.js" th:href="@{/plugins/jquery/jquery.js}"></script>
+  <!-- Popper js -->
+  <script src="../plugins/popper/popper.min.js" th:href="@{/plugins/popper/popper.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../plugins/bootstrap/js/bootstrap.min.js" th:href="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+  <!-- Smooth Scroll -->
+  <script src="../plugins/smoothscroll/SmoothScroll.min.js" th:href="@{/plugins/smoothscroll/SmoothScroll.min.js}"></script>  
+  <!-- Isotope -->
+  <script src="../plugins/isotope/mixitup.min.js" th:href="@{/plugins/isotope/mixitup.min.js}"></script>  
+  <!-- Magnific Popup -->
+  <script src="../plugins/magnific-popup/jquery.magnific-popup.min.js" th:href="@{/plugins/magnific-popup/jquery.magnific-popup.min.js}"></script>
+  <!-- Slick Carousel -->
+  <script src="../plugins/slick/slick.min.js" th:href="@{/plugins/slick/slick.min.js}"></script>  
+  <!-- SyoTimer -->
+  <script src="../plugins/syotimer/jquery.syotimer.min.js" th:href="@{/plugins/syotimer/jquery.syotimer.min.js}"></script>
+  <!-- Google Mapl -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+  <!-- Custom Script -->
+  <script src="../js/custom.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+  <script type="text/javascript" src="../plugins/google-map/gmap.js" th:href="@{/plugins/google-map/gmap.js}"></script>
+  <script src="../js/custom.js" th:href="@{/js/custom.js}"></script>
+</body>
+
+</html>
